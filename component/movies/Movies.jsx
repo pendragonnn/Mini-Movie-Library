@@ -10,6 +10,7 @@ export default function Movies() {
   const [searchNotFound, setSearchNotFound] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(true);
+  const [totalPage, setTotalPage] = useState(0)
 
   const fetchMovieData = (page) => {
     const options = {
@@ -30,6 +31,7 @@ export default function Movies() {
         setMovies(movie.results);
         setIsLoading(false);
         setOriginalMovies(movie.results);
+        setTotalPage(movie.total_pages)
       })
       .catch((err) => {
         console.error(err);
@@ -57,11 +59,24 @@ export default function Movies() {
     }
   };
 
+  const onPaginationNextHandler = (currentPage) => {
+    setCurrentPage(currentPage + 1)
+    setIsLoading(true)
+  }
+
+  const onPaginationPreviousHandler = (currentPage) => {
+    if (currentPage === 1) {
+      return
+    }
+    setIsLoading(true)
+    setCurrentPage(currentPage - 1)
+  }
+
   return (
     <div>
       {isLoading ? (
         <div className="d-flex justify-content-center fw-bold align-items-center vh-100">
-          <Typed strings={['Loading...']} typeSpeed={10}/>
+          <Typed strings={['Loading...']} typeSpeed={10} />
         </div>
       ) : (
         <div>
@@ -101,6 +116,20 @@ export default function Movies() {
                 </div>
               </div>
             ))}
+          </div>
+          <div className="container d-flex align-items-end flex-column mx-auto">
+            <ul className="pagination">
+              {currentPage !== 1 && (
+                <li className="page-item"><button className="page-link text-warning bg-secondary" onClick={() => onPaginationPreviousHandler(currentPage)}>Previous</button></li>
+              )}
+              <li className="page-item bg-dark">
+                <span className="page-link text-warning">{currentPage}</span>
+              </li>
+              {currentPage !== totalPage && (
+                <li className="page-item"><button className="page-link text-warning bg-secondary" onClick={() => onPaginationNextHandler(currentPage)}>Next</button></li>
+              )}
+            </ul>
+            <small className="d-block">Page: {currentPage} / {totalPage}</small>
           </div>
         </div>
       )}
