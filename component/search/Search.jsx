@@ -6,7 +6,6 @@ export default function Search({ searchMovie, currentPage }) {
 
   const onInputChangeEventHanlder = (event) => {
     const keyword = event.target.value
-    console.log(keyword)
     setInput(keyword)
     searchMovie(input, keyword.length)
   }
