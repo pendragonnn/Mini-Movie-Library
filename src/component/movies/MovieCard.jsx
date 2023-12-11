@@ -5,7 +5,7 @@ export default function MovieCard( {movieData} ) {
   return (
     <div className="movie m-2 rounded">
       <div>
-        <Image src={'https://www.themoviedb.org/t/p/original/' + movieData.poster_path} alt="Image" width={300} height={400} />
+        <Image src={'https://www.themoviedb.org/t/p/original/' + movieData.poster_path} alt="Image" width={200} height={300} />
       </div>
       <div className="movie-info">
         <h3 className="fw-bold">{movieData.original_title}</h3>
@@ -20,9 +20,9 @@ export default function MovieCard( {movieData} ) {
           <span className="mbr-3 green">{movieData.overview}</span>
         </div>
         <div className="d-flex flex-row align-items-center justify-content-center">
-          <button className="btn btn-warning w-100 fw-bold">
+          <button className="btn btn-warning w-100">
             {" "}
-            See Detail
+            <a className='fw-bold text-decoration-none text-black' href={`/movie/${movieData.id}`}>See Detail</a>
           </button>
         </div>
       </div>

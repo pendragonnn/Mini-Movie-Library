@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Typed from "react-typed";
 import MovieDetail from "@/component/movies/MovieDetail";
 
-export default function Random() {
+export default function Page({ params }) {
   const [isMovieFound, setIsMovieFound] = useState(false);
   const [movie, setMovie] = useState([]);
-  const [id, setId] = useState(Math.floor(Math.random() * 100000));
+  const movieId = params.movieId
   const [isLoading, setIsLoading] = useState(null);
 
   const fetchMovieData = async (id) => {
@@ -41,25 +41,13 @@ export default function Random() {
     }
   };
 
-  const onGenerateButtonClicked = () => {
-    const movieId = Math.floor(Math.random() * 100000);
-    setId(movieId);
-
-    fetchMovieData(id);
-  };
+  useEffect(() => {
+    // fetch api
+    fetchMovieData(movieId);
+  }, []);
 
   return (
     <div className="container vh-100 d-flex flex-column align-items-center">
-      <h1 className="text-center mt-4 green">Random Movie Picker</h1>
-      <p className="text-white">
-        Click the &quot;generate&quot; button to start
-      </p>
-      <button
-        className="btn bg-warning text-black fw-bold p-2 rounded"
-        onClick={() => onGenerateButtonClicked()}
-      >
-        Generate
-      </button>
       {isMovieFound && !isLoading && (
         <MovieDetail movieData={movie}/>
       )}
