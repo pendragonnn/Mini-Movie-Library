@@ -1,8 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import Image from "next/image";
 import Search from "../search/Search";
 import Typed from 'react-typed'
+import MovieCard from "./MovieCard";
+import Pagination from "../pagination/Pagination";
 
 export default function Movies() {
   const [movies, setMovies] = useState([]);
@@ -91,46 +92,10 @@ export default function Movies() {
           )}
           <div className="container movie-section text-white w-100 my-3">
             {movies.map((movie, id) => (
-              <div className="movie m-2 rounded" key={id}>
-                <div>
-                  <Image src={'https://www.themoviedb.org/t/p/original/' + movie.poster_path} alt="Image" width={300} height={400} />
-                </div>
-                <div className="movie-info">
-                  <h3 className="fw-bold">{movie.original_title}</h3>
-                  <div className="d-flex flex-column justify-content-start align-items-start gap-1">
-                    <span className="orange fw-bold">Vote: {movie.vote_average.toFixed(2)}</span>
-                    <span className="green">Released: {movie.release_date}</span>
-                  </div>
-                </div>
-                <div className="overview">
-                  <h4>{movie.original_title}</h4>
-                  <div className="mb-2">
-                    <span className="mbr-3 green">{movie.overview}</span>
-                  </div>
-                  <div className="d-flex flex-row align-items-center justify-content-center">
-                    <button className="btn btn-warning w-100 fw-bold">
-                      {" "}
-                      See Detail
-                    </button>
-                  </div>
-                </div>
-              </div>
+              <MovieCard key={id} movieData={movie}/>
             ))}
           </div>
-          <div className="container d-flex align-items-end flex-column mx-auto">
-            <ul className="pagination">
-              {currentPage !== 1 && (
-                <li className="page-item"><button className="page-link text-warning bg-secondary" onClick={() => onPaginationPreviousHandler(currentPage)}>Previous</button></li>
-              )}
-              <li className="page-item bg-dark">
-                <span className="page-link text-warning">{currentPage}</span>
-              </li>
-              {currentPage !== totalPage && (
-                <li className="page-item"><button className="page-link text-warning bg-secondary" onClick={() => onPaginationNextHandler(currentPage)}>Next</button></li>
-              )}
-            </ul>
-            <small className="d-block">Page: {currentPage} / {totalPage}</small>
-          </div>
+          <Pagination currentPage={currentPage} totalPage={totalPage} onPaginationNextHandler={onPaginationNextHandler} onPaginationPreviousHandler={onPaginationPreviousHandler}/>
         </div>
       )}
     </div>
