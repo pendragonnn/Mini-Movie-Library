@@ -33,23 +33,16 @@ header {
   width: 100% !important;
 }
 
-.search {
-  background-color: transparent;
-  border: 2px solid var(--primary-color);
-  border-radius: 50px;
-  font-family: inherit;
-  font-size: 1rem;
-  padding: 0.5rem 1rem;
-  color: #fff;
-}
-
-.search::placeholder {
+.form-control-no-outline::placeholder {
   color: #7e7e82;
 }
 
-.search:focus {
-  outline: none;
-  background-color: var(--primary-color);
+.form-control-no-outline:focus {
+  box-shadow: none !important; 
+}
+
+::placeholder {
+  color: white !important;
 }
 
 .movie-section{
@@ -68,7 +61,9 @@ header {
 }
 
 .movie img {
-  width: 100%;
+  max-width: auto;
+  min-width: 100%;
+  max-height: auto;
   object-fit: cover;
 }
 
@@ -106,13 +101,13 @@ header {
 }
 
 .overview {
-  background-color: #505050;
+  background-color: green;
   padding: 2rem;
   position: absolute;
   left: 0;
   bottom: 0;
   right: 0;
-  max-height: 100%;
+  height: 100%;
   transform: translateY(101%);
   overflow-y: auto;
   transition: transform 0.3s ease-in;

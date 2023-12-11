@@ -1,21 +1,13 @@
-import React from 'react'
 import Link from 'next/link'
+import React from 'react'
 
 export default function Header() {
-
-
   return (
-    <div className='w-100 '>
-      <div className='d-flex flex-row justify-content-between align-items-center w-100'>
-        <h1 className='fw-bold'>MovieMingle</h1>
-        <form id='form text-white' 
-          // onSubmit={handleSubmit}
-        >
-          <input type="text" id='search' className='search' placeholder='Search' 
-          // onChange={handleOnSearch}
-          />
-        </form>
+    <nav className="navbar navbar-expand-lg bg-dark">
+      <div className="container-fluid d-flex flex-row justify-content-between align-items-center">
+        <a className="fw-bold fs-2 orange p-2 text-decoration-none" href="/">Mini Movie Library</a>
+        <Link className='green fw-semibold fs-5 text-decoration-none' href="/random">Random Movie Picker</Link>
       </div>
-    </div>
+    </nav>
   )
 }
