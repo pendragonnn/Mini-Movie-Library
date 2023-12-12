@@ -8,7 +8,7 @@ export default function Random() {
   const [isMovieFound, setIsMovieFound] = useState(false);
   const [movie, setMovie] = useState([]);
   const [id, setId] = useState(Math.floor(Math.random() * 100000));
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchMovieData = async (id) => {
     setIsLoading(true);

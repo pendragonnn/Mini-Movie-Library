@@ -8,7 +8,7 @@ export default function Page({ params }) {
   const [isMovieFound, setIsMovieFound] = useState(false);
   const [movie, setMovie] = useState([]);
   const movieId = params.movieId;
-  const [isLoading, setIsLoading] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const fetchMovieData = async (id) => {
     setIsLoading(true);
@@ -41,11 +41,11 @@ export default function Page({ params }) {
   }, [movieId]);
 
   return (
-    <div className="container vh-100 d-flex flex-column align-items-center mt-5">
+    <div className="container d-flex flex-column align-items-center mt-3">
       {isMovieFound && !isLoading && <MovieDetail movieData={movie} />}
 
       {isLoading && (
-        <div className="d-flex justify-content-center fw-bold align-items-center green h-100">
+        <div className="d-flex vh-100 justify-content-center fw-bold align-items-center green h-100">
           <Typed strings={["Loading..."]} typeSpeed={10} />
         </div>
       )}

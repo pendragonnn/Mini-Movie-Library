@@ -4,7 +4,7 @@ import * as Icon from "react-bootstrap-icons";
 
 export default function MovieDetail({ movieData }) {
   return (
-    <div className="container d-flex justify-content-center my-3 vh-100 gap-4 ">
+    <div className="container d-flex flex-column align-items-center justify-content-center flex-lg-row my-4 gap-3 w-75">
       <div>
         {movieData.poster_path ? (
           <Image
@@ -27,13 +27,13 @@ export default function MovieDetail({ movieData }) {
           />
         )}
       </div>
-      <div className="w-50">
-        <h3 className="text-warning">
+      <div >
+        <h3 className="text-warning text-center text-md-start">
           {movieData.original_title} <small class="badge rounded-pill text-bg-secondary fs-6">language: {movieData.original_language}</small>
         </h3>
         {movieData.tagline && <small className="green">{movieData.tagline}</small>}
 
-        <div className="d-flex justify-content-between align-items-center">
+        <div className="d-flex justify-content-start align-items-center gap-3">
           {movieData.status === "Released" ? (
             <div className="text-white">
               {movieData.status}: {movieData.release_date}
@@ -59,7 +59,7 @@ export default function MovieDetail({ movieData }) {
           </div>
         )}
 
-        <p className="text-white overflow-auto max-height-100 h-50">
+        <p className="text-white overflow-auto">
           {movieData.overview}
         </p>
       </div>
