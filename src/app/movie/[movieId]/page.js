@@ -7,7 +7,7 @@ import MovieDetail from "@/component/movies/MovieDetail";
 export default function Page({ params }) {
   const [isMovieFound, setIsMovieFound] = useState(false);
   const [movie, setMovie] = useState([]);
-  const movieId = params.movieId
+  const movieId = params.movieId;
   const [isLoading, setIsLoading] = useState(null);
 
   const fetchMovieData = async (id) => {
@@ -28,33 +28,25 @@ export default function Page({ params }) {
       );
       const movie = await response.json();
 
-      if (movie.status_code === 34) {
-        fetchMovieData(Math.floor(Math.random() * 100000));
-        return;
-      } else {
-        setIsLoading(false);
-        setMovie(movie);
-        setIsMovieFound(true);
-      }
+      setIsLoading(false);
+      setMovie(movie);
+      setIsMovieFound(true);
     } catch (err) {
       console.error(err);
     }
   };
 
   useEffect(() => {
-    // fetch api
     fetchMovieData(movieId);
-  }, []);
+  }, [movieId]);
 
   return (
-    <div className="container vh-100 d-flex flex-column align-items-center">
-      {isMovieFound && !isLoading && (
-        <MovieDetail movieData={movie}/>
-      )}
+    <div className="container vh-100 d-flex flex-column align-items-center mt-5">
+      {isMovieFound && !isLoading && <MovieDetail movieData={movie} />}
 
       {isLoading && (
         <div className="d-flex justify-content-center fw-bold align-items-center green h-100">
-          <Typed strings={["Picking ur Movie..."]} typeSpeed={10} />
+          <Typed strings={["Loading..."]} typeSpeed={10} />
         </div>
       )}
     </div>
